@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Display Data from Google Apps Script</title>
+</head>
+<body>
+
+<div id="data-container"></div>
+
+<script>
+// Function to fetch data from the Google Apps Script URL
+function fetchData() {
+  fetch('https://script.google.com/macros/s/AKfycbxERssK_OqmDeBSCds6Htv7q9BaXGrMJ4vYhjeGJUf9H0sVq8d_GfAMEoJoYX9sDrQ/exec?read')
+    .then(response => response.json())
+    .then(data => {
+      console.log(data); // Print out the data to inspect its format
+      // Check if data is an array or a single object
+      displayData([data]);
+      //if (Array.isArray(data)) {
+       // // Once data is fetched and confirmed to be an array, display it on the page
+       // displayData(data);
+      //} else if (typeof data === 'object' && data !== null) {
+       // // If data is a single object, convert it to an array
+       // displayData([data]);
+      //} else {
+       // console.error('Data is not in the expected format:', data);
+      //}
+    })
+    ////.catch(error => console.error('Error fetching data:', error));
+}
+
+// Function to display the fetched data on the page
+function displayData(data) {
+  const dataContainer = document.getElementById('data-container');
+  dataContainer.innerHTML = data; // Clear previous data
+}
+
+// Call the fetchData function when the page loads
+window.onload = fetchData;
+</script>
+
+</body>
+</html>
